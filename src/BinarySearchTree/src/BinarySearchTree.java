@@ -1,3 +1,5 @@
+package BinarySearchTree.src;
+
 // Java program to demonstrate delete operation in binary search tree
 class BinarySearchTree {
 	/* Class containing left and right child of current node and key value */
@@ -136,15 +138,15 @@ class BinarySearchTree {
 		System.out.println("Inorder traversal of the given tree");
 		tree.inorder();
 
-//		System.out.println("\nDelete 20");
-//		tree.deleteKey(20);
-//		System.out.println("Inorder traversal of the modified tree");
-//		tree.inorder();
-//
-//		System.out.println("\nDelete 30");
-//		tree.deleteKey(30);
-//		System.out.println("Inorder traversal of the modified tree");
-//		tree.inorder();
+		System.out.println("\nDelete 20");
+	    tree.deleteKey(20);
+		System.out.println("Inorder traversal of the modified tree");
+		tree.inorder();
+
+		System.out.println("\nDelete 30");
+		tree.deleteKey(30);
+		System.out.println("Inorder traversal of the modified tree");
+		tree.inorder();
 
 		System.out.println("\nDelete 50");
 		tree.deleteKey(50);
