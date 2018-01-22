@@ -11,6 +11,7 @@ public class UseList {
 		l.add(11);
 		l.add(13);
 		l.printList();
+		l.addAtIndex(20, 2);
 		l.delete(2);
 		l.printList();
 	}

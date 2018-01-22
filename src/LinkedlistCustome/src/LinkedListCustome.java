@@ -1,6 +1,5 @@
 package LinkedlistCustome.src;
 
-
 public class LinkedListCustome<V> {
 
 	public static int size = 0;
@@ -15,7 +14,15 @@ public class LinkedListCustome<V> {
 			this.value = value;
 			this.next = next;
 		}
+
+		@Override
+		public String toString() {
+			return "Node [value=" + value + "]";
+		}
+		
+		
 	}
+
 	public void add(V value) {
 
 		if (value == null) {
@@ -38,48 +45,48 @@ public class LinkedListCustome<V> {
 		}
 
 	}
-	
-	public void delete(int index){
-		
-		if(head == null) return;
-		
-		if(index == 0 ){
+
+	public void delete(int index) {
+
+		if (head == null)
+			return;
+
+		if (index == 0) {
 			head = head.next;
 		}
-		
+
 		Node<V> temp = head;
-		for(int i = 0 ; i < index-1 || temp.next == null ; i++){
+		for (int i = 0; i < index - 1 || temp.next == null; i++) {
 			temp = temp.next;
 		}
-		
-		temp.next = temp.next.next;	
+
+		temp.next = temp.next.next;
 	}
-	
-	public void addAtIndex(V value,int index){
-		
+
+	public void addAtIndex(V value, int index) {
+
 		Node<V> entry = new Node<V>(value, null);
-		
+
 		Node<V> current = head;
-		
-		for(int i = 0 ; i < index && current.next == null ; i ++){
-			
-			current = current.next;		
-		}
-		
-		
-		
-		
-	}
-	
-public void printList(){
-	
-	    Node<V> current = head;
-		
-		while(current != null){
-			System.out.println(current.value);
+		Node<V> temp = null;
+		for (int i = 0; i < index-1 || current.next == null; i++) {
 			current = current.next;
 		}
-		
+      
+		entry.next = current.next; 
+		current.next = entry;
+
+	}
+
+	public void printList() {
+
+		Node<V> current = head;
+		while (current != null) {
+			System.out.print(current);
+			System.out.println(" ");
+			current = current.next;
+		}
+
 	}
 
 }
