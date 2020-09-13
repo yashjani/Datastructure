@@ -1,6 +1,6 @@
 package BinarySearchTree.src;
 
-// Java program to demonstrate delete operation in binary search tree
+//Java program to demonstrate delete operation in binary search tree 
 class BinarySearchTree {
 	/* Class containing left and right child of current node and key value */
 	class Node {
@@ -105,16 +105,42 @@ class BinarySearchTree {
 		}
 	}
 
-	void preOrder() {
-		preOrderRec(root);
+	/*
+	 * Function to find LCA of n1 and n2. The function assumes that both n1 and n2
+	 * are present in BST
+	 */
+	Node lca(Node node, int n1, int n2) {
+		if (node == null)
+			return null;
+
+		// If both n1 and n2 are smaller than root, then LCA lies in left
+		if (node.key > n1 && node.key > n2)
+			return lca(node.left, n1, n2);
+
+		// If both n1 and n2 are greater than root, then LCA lies in right
+		if (node.key < n1 && node.key < n2)
+			return lca(node.right, n1, n2);
+
+		return node;
 	}
 
-	void preOrderRec(Node node) {
-		if (node != null) {
-			System.out.println(node.key);
-			preOrderRec(node.left);
-			preOrderRec(node.right);
-		}
+	// Returns true if tree with given root contains
+	// dead end or not. min and max indicate range
+	// of allowed values for current node. Initially
+	// these values are full range.
+	boolean deadEnd(Node root, int min, int max) {
+		// if the root is null or the recursion moves
+		// after leaf node it will return false
+		// i.e no dead end.
+		if (root == null)
+			return false;
+
+		// if this occurs means dead end is present.
+		if (min == max)
+			return true;
+
+		// heart of the recursion lies here.
+		return deadEnd(root.left, min, root.key - 1) || deadEnd(root.right, root.key + 1, max);
 	}
 
 	// Driver Program to test above functions
@@ -122,7 +148,12 @@ class BinarySearchTree {
 		BinarySearchTree tree = new BinarySearchTree();
 
 		/*
-		 * Let us create following BST 50 / \ 30 70 / \ / \ 20 40 60 80
+		 * Let us create following BST 
+		 * 	  50
+		 *   /  \ 
+		 *  30  70 
+		 * / \  / \ 
+		 * 20 40 60 80
 		 */
 		tree.insert(50);
 		tree.insert(30);
@@ -131,15 +162,12 @@ class BinarySearchTree {
 		tree.insert(70);
 		tree.insert(60);
 		tree.insert(80);
-
-		System.out.println("Preorder traversal of the given tree");
-		tree.preOrder();
-
+		System.out.println(tree.lca(tree.root, 20, 40).key);
 		System.out.println("Inorder traversal of the given tree");
 		tree.inorder();
 
 		System.out.println("\nDelete 20");
-	    tree.deleteKey(20);
+		tree.deleteKey(20);
 		System.out.println("Inorder traversal of the modified tree");
 		tree.inorder();
 
@@ -152,6 +180,5 @@ class BinarySearchTree {
 		tree.deleteKey(50);
 		System.out.println("Inorder traversal of the modified tree");
 		tree.inorder();
-
 	}
 }
